@@ -1,0 +1,26 @@
+# Bitte folgende Syntax beachten:
+# Ein Kommentar beginnt mit dem Zeichen '#' am Zeilenanfang.
+# Ein neuer Datensatz beginnt mit einer Zeile, die nur ein
+#     Minuszeichen '-' am Zeilenanfang hat.
+# Jeder Datensatz repräsentiert ein Werk und besteht aus Datenfeldern.
+# Jedes Datenfeld ist einen Tabulator (4 oder 8 Leerzeichen) eingerückt
+# und besteht aus den Elementen "Bezeichner", einem anschließenden ":"
+# und den eigentlichen Daten in einer Zeile (s. Beispiel).
+# Das Format der Daten wird automatisch erkannt. Datumfelder müssen
+# aber immer die genormte Form YYYY-MM-DD haben (s. Beispiel).
+# Die Wahl der Bezeichner bleibt Dir überlassen, sollte aber durchgängig
+# für alle Datensätze gleich sein, wobei auch zwischen Groß- und
+# Kleinschreibung unterschieden wird. Die Bezeichner dienen nur als
+# "Datenmarkierer" - sie werden auf der Webseite nicht dargestellt. Sie dürfen
+# keine Sonderzeichen oder Leerzeichen enthalten und sollten möglichst kurz
+# und prägnant sein (z.B.: "id" statt "Werkeverzeichniss_nummer")
+-
+    id: 1
+    date: 2010-12-23
+    name: Erstes Werk
+    link:
+-
+    id: 2
+    date: 2010-12-24
+    name: Zweites Werk
+    link:

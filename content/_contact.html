@@ -1,0 +1,17 @@
+{% extends "skeleton/_root.html" %}
+{% block all %}
+{% load mailobfuscate %}
+<ul style="list-style: disc url(/media/img/email.png) outside;">
+<li>{% filter obfuscate %}hubert@hanghofer.info{% endfilter %}</li>
+</ul>
+
+<ul style="list-style: disc url(/media/img/phone.png) outside; margin-top: 1em;">
+<li>+43(0)699.1152.1789</li>
+</ul>
+
+<ul style="list-style: disc url(/media/img/home.png) outside; margin-top: 1em;">
+<li>Gemeindeplatz 4<br/>
+4600 Thalheim bei Wels<br/>
+Austria</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "skeleton/_body.html" %}
+
+{%hyde
+    title: "Œuvres"
+    created: 2011-01-10
+    listing: True
+    display_in_list: False
+    language: "Français"
+    editor1: "Œuvres sacrale publié par"
+%}
+
+{% block content_body %}
+{% include "../content/_works.html" %}
+{% endblock %}
