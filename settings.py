@@ -1,24 +1,24 @@
-import os
-
-ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
+import os, sys, yaml
+here = lambda *x: os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
 
 #Directories
-LAYOUT_DIR = os.path.join(ROOT_PATH, 'layout')
-CONTENT_DIR = os.path.join(ROOT_PATH, 'content')
-MEDIA_DIR = os.path.join(ROOT_PATH, 'media')
-DEPLOY_DIR = os.path.join(ROOT_PATH, 'deploy')
-TMP_DIR = os.path.join(ROOT_PATH, 'deploy_tmp')
-import sys
-DJANGO_PATH = os.path.join(ROOT_PATH, 'django')
-sys.path.append(DJANGO_PATH)
+LAYOUT_DIR = here('layout')
+CONTENT_DIR = here('content')
+MEDIA_DIR = here('media')
+DEPLOY_DIR = here('deploy')
+TMP_DIR = here('deploy_tmp')
 
-BACKUPS_DIR = os.path.join(ROOT_PATH, 'backups')
+BACKUPS_DIR = here('backups')
 BACKUP = False
+
+DJANGO_PATH = here('django')
+sys.path.append(DJANGO_PATH)
+DATA_PATH = here('data')
 
 SITE_ROOT = "/"
 SITE_WWW_URL = "http://hanghofer.info"
 SITE_NAME = "Hubert Hanghofer"
-SITE_AUTHOR = "BrewBert"
+SITE_AUTHOR = SITE_NAME
 
 #Url Configuration
 GENERATE_ABSOLUTE_FS_URLS = False
@@ -36,8 +36,8 @@ GENERATE_CLEAN_URLS = False
 
 # A list of filenames (without extensions) that will be considered listing
 # pages for their enclosing folders.
-# LISTING_PAGE_NAMES = ['index']
-LISTING_PAGE_NAMES = ['listing', 'index', 'default']
+LISTING_PAGE_NAMES = ['index']
+# LISTING_PAGE_NAMES = ['listing', 'index', 'default']
 
 # Determines whether or not to append a trailing slash to generated urls when
 # clean urls are enabled.
@@ -63,18 +63,22 @@ MEDIA_PROCESSORS = {
                 'hydeengine.media_processors.YUICompressor',),
         '.sass':('hydeengine.media_processors.TemplateProcessor',
                 'hydeengine.media_processors.SASS',
-                'hydeengine.media_processors.YUICompressor',),                
+                'hydeengine.media_processors.YUICompressor',),
         '.less':('hydeengine.media_processors.TemplateProcessor',
                 'hydeengine.media_processors.LessCSS',
-                'hydeengine.media_processors.YUICompressor',),                
+                'hydeengine.media_processors.YUICompressor',),
         '.hss':(
                 'hydeengine.media_processors.TemplateProcessor',
                 'hydeengine.media_processors.HSS',
                 'hydeengine.media_processors.YUICompressor',),
         '.js':(
                 'hydeengine.media_processors.TemplateProcessor',
-                'hydeengine.media_processors.YUICompressor',)
-    } 
+                'hydeengine.media_processors.ClosureCompiler',),
+        '.coffee':(
+                'hydeengine.media_processors.TemplateProcessor',
+                'hydeengine.media_processors.CoffeeScript',
+                'hydeengine.media_processors.JSmin',)
+    }
 }
 
 CONTENT_PROCESSORS = {
@@ -94,7 +98,8 @@ SITE_POST_PROCESSORS = {
 }
 
 CONTEXT = {
-    'GENERATE_CLEAN_URLS': GENERATE_CLEAN_URLS
+    'GENERATE_CLEAN_URLS': GENERATE_CLEAN_URLS,
+    'works': yaml.load(open(os.path.join(DATA_PATH, 'works.yaml')))
 }
 
 FILTER = { 
@@ -121,8 +126,8 @@ YUI_COMPRESSOR = "./lib/yuicompressor-2.4.2.jar"
 # path for Closure Compiler, or None if you don't
 # want to compress JS/CSS. Project homepage:
 # http://closure-compiler.googlecode.com/
-#CLOSURE_COMPILER = "./lib/compiler.jar"
-CLOSURE_COMPRILER = None 
+CLOSURE_COMPILER = "./lib/compiler.jar"
+#CLOSURE_COMPRILER = None 
 
 # path for HSS, which is a preprocessor for CSS-like files (*.hss)
 # project page at http://ncannasse.fr/projects/hss

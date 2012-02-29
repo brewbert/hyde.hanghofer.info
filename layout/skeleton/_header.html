@@ -1,16 +1,45 @@
-<div id="header">
-    <a href="{{site.url}}/index.html">
-        <h1>{{site.name}}</h1>
-    </a>
-</div>
+{% extends "skeleton/_root.html" %}
+{% block all %}
 
-{% block breadcrumbs %}
-{% include "skeleton/_breadcrumbs.html"%}
-{% endblock %}
+<ul class="lang">
+    {% for module in site.children %}
+    <li{% if page.module == module %} class="selected" {% endif %}>
+        {% if not forloop.first %}
+        <span class="separator">~&nbsp;</span>
+        {% endif %}
+        <a href="{{module.listing_url}}">{{module.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
 
-{% block context_nav %}
-{% endblock %}
+<h1 class="header"><a href="{{site.url}}/">{{site.name}}</a></h1>
 
-{% block sitenav %}
-{% include "skeleton/_site_nav.html" %}
+{% comment %}
+<ul class="breadcrumbs">
+	{% for node in page.node.ancestors %}
+    {% if not forloop.first %}
+    <li>{% block breadcrumb_seperator %}<span class="separator">&nbsp;&gt;&nbsp;</span>{% endblock %}
+		<a href="{{node.listing_url}}">{{node.listing_page.title}}</a>
+	</li>
+    {% endif %}
+	{% endfor %}
+</ul>
+{% endcomment %}
+
+<ul class="sitenav">
+{% if page.node != site %}
+    {% for node in page.node.module.walk %}
+        {% if node.has_listing %} 
+        <li{% if node == page.node %} class="selected"{% endif %}>
+        <a href="{{node.listing_url}}">{{node.listing_page.title}}</a>
+        </li>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <li>&nbsp;</li>
+{% endif %}
+</ul>
+
+<img src="/media/img/noten-150x104.png" style="margin-top: -2em;" width="150" height="104" align="right"/>
+
 {% endblock %}

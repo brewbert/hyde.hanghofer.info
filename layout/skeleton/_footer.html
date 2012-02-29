@@ -1,1 +1,13 @@
-<div id='footer'>Copyright {{site.name}}</div>
+<div id='footer'>
+Copyright
+{% if page.node.module == site.module %}
+<a href="en/contact/index.html">
+{% else %}
+<a href="{{page.node.module.url}}/contact/index.html">
+{% endif %}
+{{site.name}}</a>
+<span class="separator">.::.</span>
+webbed by <a href="http://hubert.hanghofer.net/">BrewBert</a>
+<span class="separator">.::.</span>
+powered by <a href="https://github.com/lakshmivyas/hyde">hyde</a>
+</div>
