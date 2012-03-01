@@ -16,7 +16,7 @@ sys.path.append(DJANGO_PATH)
 DATA_PATH = here('data')
 
 SITE_ROOT = "/"
-SITE_WWW_URL = "http://hanghofer.info"
+SITE_WWW_URL = "http://hyde.hanghofer.info"
 SITE_NAME = "Hubert Hanghofer"
 SITE_AUTHOR = SITE_NAME
 
